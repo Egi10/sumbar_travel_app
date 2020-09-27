@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:rating_bar/rating_bar.dart';
 import 'package:sumbar_travel_app/models/top_destinations_model.dart';
+import 'package:sumbar_travel_app/screen/detail_top_destinations_screen.dart';
 
 class TopDestinations extends StatelessWidget {
   @override
@@ -46,7 +47,12 @@ class TopDestinations extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(10.0))),
                     child: InkWell(
                       onTap: () {
-                        print('Klik Disni');
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return DetailTopDestinations(
+                            topDestinations: topDestinations,
+                          );
+                        }));
                       },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -88,16 +94,20 @@ class TopDestinations extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 12.0),
-                            child: RatingBarIndicator(
-                              itemBuilder: (context, _) => Icon(
-                                Icons.star,
-                                color: Colors.amber,
-                              ),
-                              itemSize: 12.0,
-                              itemCount: 5,
-                              itemPadding: EdgeInsets.only(left: 10.0),
-                              rating: topDestinations.start,
+                            padding:
+                                EdgeInsets.only(top: 12, left: 10, right: 10),
+                            child: Row(
+                              children: <Widget>[
+                                RatingBar.readOnly(
+                                  initialRating: topDestinations.start,
+                                  isHalfAllowed: true,
+                                  halfFilledIcon: Icons.star_half,
+                                  filledIcon: Icons.star,
+                                  emptyIcon: Icons.star_border,
+                                  size: 20.0,
+                                  filledColor: Colors.amber,
+                                ),
+                              ],
                             ),
                           ),
                         ],
