@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sumbar_travel_app/models/popular_hotels_model.dart';
+import 'package:sumbar_travel_app/screen/detail_popular_hotels_screen.dart';
 
 class PopularHotels extends StatelessWidget {
   @override
@@ -43,7 +44,12 @@ class PopularHotels extends StatelessWidget {
                     children: <Widget>[
                       InkWell(
                         onTap: () {
-                          print('Klik Disni');
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return DetailPopularHotels(
+                              popularHotels: popular,
+                            );
+                          }));
                         },
                         child: Hero(
                           tag: popular.image,
